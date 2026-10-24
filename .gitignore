@@ -19,3 +19,6 @@ agent-qq-sandbox-bot/
 astrbot/
 astrbot-persona-prompts/
 onebot-llm-agent/
+
+# 运行时状态（含 AppID，不进仓库）
+ws_sessions.json

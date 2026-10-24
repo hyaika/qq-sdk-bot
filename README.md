@@ -54,21 +54,29 @@ cd qq_ai_bot
 pip install -r requirements.txt  # (如有 requirements 文件)
 ```
 
-### 2. 配置修改
-编辑 `qq_ai_bot.py` 顶部配置区域：
-```python
-# 模型配置
-MODEL = "auto"                # 主模型(auto自动选择或deepseek-v4-flash)
-FALLBACK_MODEL = "DeepSeek-V4-Flash"  # 失败时的降级模型
+### 2. 配置凭证（环境变量，不写进代码）
+项目用环境变量管理敏感信息，避免硬编码进仓库。
 
-# 门控配置
-QUIET_ENABLED = False         # 关闭静默时段(23:00-07:00)，全天响应
-BOT_SPAM_LIMIT = 3            # 30秒内最多回复3次
-BOT_SPAM_WINDOW = 30          # 反刷屏统计窗口(秒)
-BOT_SPAM_COOLDOWN = 30        # 触发后冷却(秒)
+```bash
+# 方式一：复制模板填写
+cp .env.example .env
+# 编辑 .env，填入 QQ_APP_ID / QQ_APP_SECRET / LLM_API_KEY 等
 
-# 其他配置见文件顶部注释
+# 方式二：直接 export
+export QQ_APP_ID="你的QQ机器人AppID"
+export QQ_APP_SECRET="你的QQ机器人AppSecret"
+export LLM_BASE_URL="https://你的LLM地址/v1"
+export LLM_API_KEY="你的LLM密钥"
 ```
+
+`qq_ai_bot.py` 顶部常量已改为从环境变量读取：
+
+| 环境变量 | 说明 | 默认值 |
+|----------|------|--------|
+| `QQ_APP_ID` | QQ 机器人 AppID | 空（必填） |
+| `QQ_APP_SECRET` | QQ 机器人 AppSecret | 空（必填） |
+| `LLM_BASE_URL` | OpenAI 兼容 LLM 地址 | `https://api.openai.com/v1` |
+| `LLM_API_KEY` | LLM 密钥 | 空（必填） |
 
 ### 3. 运行 bot
 ```bash

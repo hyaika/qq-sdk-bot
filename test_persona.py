@@ -3,8 +3,9 @@
 import asyncio, os, sys
 import openai
 
-BASE_URL = "https://api.hcnsec.cn/v1"
-API_KEY = "sk-EkYKEtQz2VG0HUEc0uWBdM92mgqgKZzSxfvRyApwNL12ye9Q"
+# 凭证从环境变量读取，避免硬编码进仓库
+BASE_URL = os.environ.get("LLM_BASE_URL", "https://api.openai.com/v1")
+API_KEY = os.environ.get("LLM_API_KEY", "")
 HERE = os.path.dirname(os.path.abspath(__file__))
 PROMPT = open(os.path.join(HERE, "prompt.md")).read()
 

@@ -61,7 +61,13 @@ log = logging.getLogger("Saika")
 
 _patch_sdk_group_all()
 
-# ── 配置 ──────────────────────────────────────────────────────────────
+# ── 配置（敏感信息从环境变量读取，避免硬编码进仓库）─────────────────────
+# QQ 机器人凭证：export QQ_APP_ID=... QQ_APP_SECRET=...
+APP_ID = os.environ.get("QQ_APP_ID", "")
+APP_SECRET = os.environ.get("QQ_APP_SECRET", "")
+# LLM 凭证：export LLM_BASE_URL=... LLM_API_KEY=...
+BASE_URL = os.environ.get("LLM_BASE_URL", "https://api.openai.com/v1")
+API_KEY = os.environ.get("LLM_API_KEY", "")
 MODEL = "auto"  # 3.8s/条，自动选模型；旧：DeepSeek-V4-Flash 2.2s
 FALLBACK_MODEL = "DeepSeek-V4-Flash"  # 主模型失败时的降级模型
 

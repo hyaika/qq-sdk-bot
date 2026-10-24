@@ -1,13 +1,15 @@
 #!/usr/bin/env python3
-"""复现心跳对'咕咕嘎嘎'的判定，测5次看稳定性"""
-import openai, time, re, sys
+"""复现心跳对'咕咕嘎嘎'的判定，测5次看稳定性（凭证从环境变量读取）"""
+import openai, time, os
 
-src = open('/home/gueste89876/qq_ai_bot/qq_ai_bot.py').read()
-m = re.search(r'API_KEY = "([^"]+)"', src)
-key = m.group(1)
-prompt = open('/home/gueste89876/qq_ai_bot/prompt.md').read()
+HERE = os.path.dirname(os.path.abspath(__file__))
+prompt = open(os.path.join(HERE, 'prompt.md')).read()
 
-client = openai.OpenAI(base_url='https://api.hcnsec.cn/v1', api_key=key, timeout=50)
+client = openai.OpenAI(
+    base_url=os.environ.get('LLM_BASE_URL', 'https://api.openai.com/v1'),
+    api_key=os.environ.get('LLM_API_KEY', ''),
+    timeout=50,
+)
 
 hb = '''【群聊心跳任务】
 这是 QQ 群「A90A197A...」最近的消息：
