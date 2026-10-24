@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+*.venv
+.env
+
+# Bot 专用
+bot.log
+bot.log.bak
+memory/
+ws_sessions.json
+
+# 子项目（独立仓库，不包含在本仓库）
+ATRI_PROJ/
+agent-qq-sandbox-bot/
+astrbot/
+astrbot-persona-prompts/
+onebot-llm-agent/
